@@ -13,46 +13,39 @@ Direct API Communication: Fetches data directly from your UniFi Controller, no i
 Configurable SSL Verification: Option to disable SSL certificate verification for controllers using self-signed certificates (use with caution!).
 
 🚀 Installation
-1. Manual Installation
-Create Custom Component Directory:
-Navigate to your Home Assistant configuration directory. This is usually /config if you are using HassOS or a Docker installation.
-Create the following directory structure:
-[your_home_assistant_config_directory]/custom_components/unifi_speed_monitor/
+Prerequisites
+Home Assistant with HACS (Home Assistant Community Store) installed.
 
-Add Integration Files:
-Inside the unifi_speed_monitor directory, create two files:
+Your UniFi Controller URL, username, and password.
 
-__init__.py: This file can be empty.
+1. Add this Repository to HACS
+Open HACS in your Home Assistant instance.
 
-sensor.py: Copy the content from the ha-custom-component-sensor Canvas into this file.
+Go to Integrations.
 
-Your directory structure should look like this:
+Click on the three dots in the top right corner and select Custom repositories.
 
-custom_components/
-└── unifi_speed_monitor/
-    ├── __init__.py
-    ├── sensor.py
-    └── manifest.json
+In the Add custom repository field, paste your GitHub repository URL: https://github.com/Nhscan/UDM_Speedtest
 
-Add manifest.json:
-Create a file named manifest.json in the unifi_speed_monitor directory and paste the following content into it:
+Select Integration as the Category.
 
-{
-  "domain": "unifi_speed_monitor",
-  "name": "UniFi Speed Monitor",
-  "version": "1.0.0",
-  "documentation": "https://github.com/your_github_username/unifi-speed-monitor-ha-custom-component",
-  "requirements": [
-    "aiohttp>=3.8.1"
-  ],
-  "dependencies": [],
-  "codeowners": ["@your_github_username"],
-  "issue_tracker": "https://github.com/home-assistant/core/issues?q=is%3Aissue+is%3Aopen+unifi_speed_monitor",
-  "config_flow": false,
-  "iot_class": "cloud_polling"
-}
+Click Add.
 
-Important: Update "documentation" and "codeowners" fields with your actual GitHub repository URL and username if you publish this.
+Alternatively, you can click the "Add to Home Assistant" button above in this README.
+
+2. Install the Integration
+After adding the repository, search for "UniFi Speed Monitor" in the HACS Integrations section.
+
+Click on it and select Download.
+
+Choose the latest version and click Download.
+
+3. Restart Home Assistant
+A full Home Assistant restart is required for the newly installed custom component to be recognized.
+
+Go to Settings -> System -> Hardware (or Host).
+
+Click on RESTART HOST and confirm.
 
 ⚙️ Configuration
 To enable the UniFi Speed Monitor, add the following to your configuration.yaml file. Make sure to replace the placeholder values with your actual UniFi Controller details.
@@ -81,7 +74,7 @@ unifi_site (Optional): The name of the UniFi site you want to monitor. For most 
 verify_ssl (Optional): Set to true if your UniFi Controller has a valid, trusted SSL certificate. Set to false if you use a self-signed certificate or don't want strict SSL verification (e.g., for local network use). Using false reduces security and is not recommended for production environments.
 
 🔄 Restart Home Assistant
-After adding/modifying the configuration.yaml entry and placing the files:
+After adding/modifying the configuration.yaml entry:
 
 Check Configuration: Go to Developer Tools -> YAML and click CHECK CONFIGURATION to ensure there are no syntax errors.
 
